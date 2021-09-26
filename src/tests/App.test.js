@@ -1,7 +1,7 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render, screen } from "@testing-library/react";
+import App from "../components/App";
 
-test('renders title', () => {
+test("renders title", () => {
   render(<App />);
   const linkElement = screen.getByText(/Air Quality App/i);
   expect(linkElement).toBeInTheDocument();
