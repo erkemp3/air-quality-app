@@ -2,58 +2,58 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import "../styles/SearchForm.scss";
+import SearchIcon from "@material-ui/icons/Search";
 
-const SearchForm = ({ results, onSubmit }) => {
-  const [searchText, setSearchText] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
-
-  const onChangeHandler = (text) => {
-    let matches = [];
-    if (text.length > 0) {
-      const cities = results.filter((result) => result.city != null);
-      matches = cities.filter((result) => {
-        const regex = new RegExp(`${text}`, "gi");
-        return result.city.match(regex);
-      });
-    }
-    console.log("matches", matches);
-    setSuggestions(matches);
-    setSearchText(text);
-  };
-
-  const onSuggestHandler = (text) => {
-    setSearchText(text);
-    setSuggestions([]);
-  };
+const SearchForm = ({
+  searchText,
+  onChangeHandler,
+  onSuggestHandler,
+  placeholder,
+  suggestions,
+  setSuggestions,
+}) => {
   return (
-    <div className="container">
-      <input
-        type="text"
-        onChange={(e) => onChangeHandler(e.target.value)}
-        value={searchText}
-        className="input-box"
-        onBlur={() => {
-          setTimeout(() => {
-            setSuggestions([]);
-          }, 100);
-        }}
-      />
-      {suggestions &&
-        suggestions.map((suggestion, i) => (
-          <div
-            key={i}
-            className="suggestion"
-            onClick={() => onSuggestHandler(suggestion.location)}
-          >
-            {suggestion.location}, {suggestion.city}
-          </div>
-        ))}
-      <button type="submit" onClick={onSubmit} className="search-form__button">
+    <div className="search">
+      <div className="searchInputs">
+        <div className="searchIcon">
+          <SearchIcon />
+        </div>
+        <input
+          type="text"
+          placeholder={placeholder}
+          onChange={(e) => onChangeHandler(e.target.value)}
+          value={searchText}
+          className="input-box"
+          onBlur={() => {
+            setTimeout(() => {
+              setSuggestions([]);
+            }, 100);
+          }}
+        />
+      </div>
+      {suggestions.length !== 0 && (
+        <div className="dataResult">
+          {suggestions &&
+            suggestions.map((suggestion, i) => (
+              <div
+                key={i}
+                className="dataItem"
+                onClick={() => onSuggestHandler(suggestion.location)}
+              >
+                <p>
+                  {" "}
+                  {suggestion.location}, {suggestion.city}{" "}
+                </p>
+              </div>
+            ))}
+        </div>
+      )}
+      {/* <button type="submit" onClick={onSubmit} className="search-form__button">
         Search
-      </button>
+      </button> */}
     </div>
   );
 };
@@ -61,7 +61,7 @@ const SearchForm = ({ results, onSubmit }) => {
 export default SearchForm;
 
 SearchForm.propTypes = {
-  results: PropTypes.arrayOf(
+  suggestions: PropTypes.arrayOf(
     PropTypes.shape({
       city: PropTypes.string.isRequired,
       location: PropTypes.string.isRequired,
@@ -73,8 +73,11 @@ SearchForm.propTypes = {
       ).isRequired,
     }).isRequired
   ).isRequired,
-
-  // searchText: PropTypes.string.isRequired,
+  searchText: PropTypes.string.isRequired,
+  onChangeHandler: PropTypes.func.isRequired,
+  onSuggestHandler: PropTypes.func.isRequired,
+  setSuggestions: PropTypes.func.isRequired,
   // setSearchText: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
+  placeholder: PropTypes.string.isRequired,
+  // onSubmit: PropTypes.func.isRequired,
 };

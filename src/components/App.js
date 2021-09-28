@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../styles/App.scss";
@@ -6,6 +7,9 @@ import AirQualitySummary from "./AirQualitySummary";
 
 const App = () => {
   const [results, setResults] = useState([]);
+  const [searchText, setSearchText] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [summary, setSummaries] = useState([]);
 
   useEffect(() => {
     axios
@@ -21,7 +25,32 @@ const App = () => {
       });
   }, []);
 
-  console.log(results);
+  // console.log(results);
+
+  const onChangeHandler = (text) => {
+    let matches = [];
+    if (text.length > 0) {
+      const cities = results.filter((result) => result.city != null);
+      matches = cities.filter((result) => {
+        const regex = new RegExp(`${text}`, "gi");
+        return result.city.match(regex);
+      });
+    }
+    setSuggestions(matches);
+    setSearchText(text);
+  };
+
+  const onSuggestHandler = (text) => {
+    setSearchText(text);
+    setSuggestions([]);
+    const data = results.filter((result) => result.location === text);
+    setSummaries(data);
+  };
+
+  console.log(summary);
+  // const handleCitySearch = () => {
+  //   setSummary(response.data.results)
+  // }
 
   return (
     <div className="App">
@@ -32,10 +61,21 @@ const App = () => {
       <p className="app-subtitle2">
         Select cities to compare using the search tool below.
       </p>
-      <SearchForm results={results} />
-      <AirQualitySummary />
+      <SearchForm
+        searchText={searchText}
+        setSearchText={setSearchText}
+        results={results}
+        suggestions={suggestions}
+        setSuggestions={setSuggestions}
+        onChangeHandler={onChangeHandler}
+        onSuggestHandler={onSuggestHandler}
+        placeholder="Enter city name..."
+      />
+      <AirQualitySummary summary={summary} />
     </div>
   );
 };
+
+// onSubmit={handleCitySearch}
 
 export default App;

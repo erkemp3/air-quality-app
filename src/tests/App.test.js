@@ -3,6 +3,6 @@ import App from "../components/App";
 
 test("renders title", () => {
   render(<App />);
-  const linkElement = screen.getByText(/Air Quality App/i);
+  const linkElement = screen.getByText(/Compare your Air/i);
   expect(linkElement).toBeInTheDocument();
 });

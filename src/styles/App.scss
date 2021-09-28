@@ -1,5 +1,9 @@
 .App {
   text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
 
   .app-title {
     margin-top: 90px;
@@ -20,6 +24,6 @@
     font-size: 30px;
     font-weight: 400;
     margin-top: 0px;
-    margin-bottom: 60px;
+    margin-bottom: 70px;
   }
 }

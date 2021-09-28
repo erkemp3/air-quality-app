@@ -1,13 +1,23 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const AirQualitySummary = (props) => {
-  const { summary, errorMessage } = props;
+const AirQualitySummary = ({ summary }) => {
+  // if (summary !== undefined) {
+  //   return (
+  //     <div>
+  //       <h1 className="location-details">{`${summary.measurements[0].lastUpdated}, ${summary.location}, ${summary.city}, ${summary.country}`}</h1>
+  //     </div>
+  //   );
+  // }
+  // return
+
   console.log(summary);
-  return !summary || errorMessage ? (
-    <h1 className="error-message">{errorMessage}</h1>
-  ) : (
-    <h1 className="location-details">{`${summary.measurements[0].lastUpdated}, ${summary.location}, ${summary.city}, ${summary.country}`}</h1>
+  return (
+    <div>
+      {summary.length !== 0 && (
+        <div className="summary">{summary.location}</div>
+      )}
+    </div>
   );
 };
 
@@ -24,11 +34,6 @@ AirQualitySummary.propTypes = {
       ).isRequired,
     }).isRequired
   ).isRequired,
-  errorMessage: PropTypes.string,
-};
-
-AirQualitySummary.defaultProps = {
-  errorMessage: "",
 };
 
 export default AirQualitySummary;
