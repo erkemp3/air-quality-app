@@ -4,9 +4,9 @@ An Air Quality App which allows users to compare air quality across cities in th
 
 ## Previews:
 
-<img src="images/mac-screenshot.png" alt="desktop" width="700">
+<img src="images/mac-screenshot.png" alt="desktop" width="950">
 
-<img src="images/phone-screenshot.png" alt="phone" width="400">
+<img src="images/phone-screenshot.png" alt="phone" width="550">
 
 ## Built Using:
 
