@@ -6,7 +6,7 @@ An Air Quality App which allows users to compare air quality across cities in th
 
 <img src="images/mac-screenshot.png" alt="desktop" width="950">
 
-<img src="images/phone-screenshot.png" alt="phone" width="550">
+<img src="images/phone-screenshot.png" alt="phone" width="470">
 
 ## Built Using:
 
