@@ -22,3 +22,31 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 100px;
+  background-color: white;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 100px;
+  background-color: lightgray;
+}
+
+@media (max-width: 900px) {
+  body {
+    margin-left: 20px;
+    margin-right: 20px;
+    background: $base-purple;
+    background: linear-gradient(
+      180deg,
+      $base-purple 0%,
+      $base-purple 33%,
+      $base-blue 100%
+    );
+  }
+}

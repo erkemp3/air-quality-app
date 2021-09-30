@@ -1,13 +1,13 @@
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable */
 
 import React from "react";
 import PropTypes from "prop-types";
 import "../styles/SearchForm.scss";
 import SearchIcon from "@material-ui/icons/Search";
+import ClearIcon from "@material-ui/icons/Clear";
 
 const SearchForm = ({
+  setSearchText,
   searchText,
   onChangeHandler,
   onSuggestHandler,
@@ -15,12 +15,21 @@ const SearchForm = ({
   suggestions,
   setSuggestions,
 }) => {
+  const clearInput = () => {
+    setSuggestions([]);
+    setSearchText("");
+  };
   return (
     <div className="search">
       <div className="searchInputs">
         <div className="searchIcon">
-          <SearchIcon />
+          {searchText.length === 0 ? (
+            <SearchIcon />
+          ) : (
+            <ClearIcon id="clearBtn" value={searchText} onClick={clearInput} />
+          )}
         </div>
+
         <input
           type="text"
           placeholder={placeholder}
@@ -34,6 +43,7 @@ const SearchForm = ({
           }}
         />
       </div>
+
       {suggestions.length !== 0 && (
         <div className="dataResult">
           {suggestions &&
@@ -51,9 +61,6 @@ const SearchForm = ({
             ))}
         </div>
       )}
-      {/* <button type="submit" onClick={onSubmit} className="search-form__button">
-        Search
-      </button> */}
     </div>
   );
 };
@@ -77,7 +84,5 @@ SearchForm.propTypes = {
   onChangeHandler: PropTypes.func.isRequired,
   onSuggestHandler: PropTypes.func.isRequired,
   setSuggestions: PropTypes.func.isRequired,
-  // setSearchText: PropTypes.func.isRequired,
   placeholder: PropTypes.string.isRequired,
-  // onSubmit: PropTypes.func.isRequired,
 };

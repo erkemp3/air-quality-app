@@ -1,4 +1,5 @@
-/* eslint-disable consistent-return */
+/* eslint-disable */
+
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../styles/App.scss";
@@ -9,7 +10,7 @@ const App = () => {
   const [results, setResults] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-  const [summary, setSummaries] = useState([]);
+  const [summaries, setSummaries] = useState([]);
 
   useEffect(() => {
     axios
@@ -25,8 +26,6 @@ const App = () => {
       });
   }, []);
 
-  // console.log(results);
-
   const onChangeHandler = (text) => {
     let matches = [];
     if (text.length > 0) {
@@ -40,17 +39,16 @@ const App = () => {
     setSearchText(text);
   };
 
-  const onSuggestHandler = (text) => {
+  const onSuggestHandler = async (text) => {
     setSearchText(text);
     setSuggestions([]);
     const data = results.filter((result) => result.location === text);
-    setSummaries(data);
+    setSummaries([...summaries, ...data]);
   };
 
-  console.log(summary);
-  // const handleCitySearch = () => {
-  //   setSummary(response.data.results)
-  // }
+  const deleteSummary = (e) => {
+    setSummaries(summaries.filter((summary) => summary.location !== e));
+  };
 
   return (
     <div className="App">
@@ -71,11 +69,9 @@ const App = () => {
         onSuggestHandler={onSuggestHandler}
         placeholder="Enter city name..."
       />
-      <AirQualitySummary summary={summary} />
+      <AirQualitySummary onSubmit={deleteSummary} summaries={summaries} />
     </div>
   );
 };
-
-// onSubmit={handleCitySearch}
 
 export default App;

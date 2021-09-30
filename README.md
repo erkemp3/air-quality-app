@@ -2,11 +2,18 @@
 
 An Air Quality App which allows users to compare air quality across cities in the UK using the Open AQ Air Quality API.
 
+## Previews:
+
+<img src="images/mac-screenshot.png" alt="desktop" width="700">
+
+<img src="images/phone-screenshot.png" alt="phone" width="400">
+
 ## Built Using:
 
 - React
 - HTML
 - CSS
+- SCSS
 - JavaScript
 - Node.js
 - APIs

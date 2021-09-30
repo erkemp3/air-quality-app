@@ -1,3 +1,7 @@
+$dark-grey: rgba(0, 0, 0, 0.815);
+$light-grey: rgba(10, 10, 10, 0.054);
+$medium-grey: rgba(10, 10, 10, 0.308);
+
 .suggestion {
   cursor: pointer;
   border: 1px;
@@ -16,7 +20,7 @@
   padding: 15px;
   height: 30px;
   width: 300px;
-  color: rgba(0, 0, 0, 0.815);
+  color: $dark-grey;
 }
 
 .searchIcon {
@@ -27,7 +31,7 @@
   place-items: center;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
-  color: rgba(10, 10, 10, 0.308);
+  color: $medium-grey;
 }
 
 input:focus {
@@ -46,17 +50,29 @@ input:focus {
   overflow: hidden;
   overflow-y: auto;
   border-radius: 10px;
+  position: absolute;
 }
 
 .dataResult::-webkit-scrollbar {
+  width: 10px;
 }
 
+.dataResult::-webkit-scrollbar-track {
+  border-radius: 100px;
+  background-color: white;
+}
+
+.dataResult::-webkit-scrollbar-thumb {
+  min-height: 50px;
+  border-radius: 100px;
+  background-color: lightgray;
+}
 .dataResult .dataItem {
   width: 100%;
   height: 50px;
   display: flex;
   align-items: center;
-  color: rgba(0, 0, 0, 0.815);
+  color: $dark-grey;
   text-align: left;
   cursor: pointer;
 }
@@ -66,9 +82,24 @@ input:focus {
 }
 
 .dataItem:hover {
-  background-color: rgba(10, 10, 10, 0.054);
+  background-color: $light-grey;
 }
 
 #clearBtn {
   cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .search input {
+    height: 30px;
+    width: 240px;
+    font-size: 16px;
+  }
+  .searchIcon svg {
+    font-size: 30px;
+  }
+  .dataResult {
+    width: 310px;
+    font-size: 15px;
+  }
 }
