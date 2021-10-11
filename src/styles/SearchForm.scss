@@ -92,14 +92,15 @@ input:focus {
 @media (max-width: 900px) {
   .search input {
     height: 30px;
-    width: 240px;
+    width: 260px;
     font-size: 16px;
   }
+
   .searchIcon svg {
     font-size: 30px;
   }
   .dataResult {
-    width: 310px;
+    width: 340px;
     font-size: 15px;
   }
 }

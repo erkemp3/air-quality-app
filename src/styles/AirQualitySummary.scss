@@ -89,6 +89,16 @@ $medium-grey: rgba(10, 10, 10, 0.671);
   .button-div {
     display: flex;
     justify-content: right;
+
+    .delete-button {
+      align-self: right;
+      text-align: right;
+      margin-top: 10px;
+      margin-right: 5px;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+    }
   }
   .summaries {
     margin-top: 15px;
@@ -96,8 +106,8 @@ $medium-grey: rgba(10, 10, 10, 0.671);
   .summary {
     overflow: hidden;
     height: 1%;
-    width: 380px;
-    min-height: 300px;
+    width: 340px;
+    min-height: 180px;
     margin-right: 20px;
     margin-left: 20px;
     margin-top: 0px;

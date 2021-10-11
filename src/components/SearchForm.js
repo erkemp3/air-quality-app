@@ -19,6 +19,10 @@ const SearchForm = ({
     setSuggestions([]);
     setSearchText("");
   };
+
+  const suggestionKey = (name, id) => {
+    return `${name}_${id}`;
+  };
   return (
     <div className="search">
       <div className="searchInputs">
@@ -49,14 +53,11 @@ const SearchForm = ({
           {suggestions &&
             suggestions.map((suggestion, i) => (
               <div
-                key={i}
+                key={suggestionKey(suggestion.location, i)}
                 className="dataItem"
                 onClick={() => onSuggestHandler(suggestion.location)}
               >
-                <p>
-                  {" "}
-                  {suggestion.location}, {suggestion.city}{" "}
-                </p>
+                <p>{`${suggestion.location}, ${suggestion.city}`}</p>
               </div>
             ))}
         </div>

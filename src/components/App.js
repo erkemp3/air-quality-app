@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../styles/App.scss";
 import SearchForm from "./SearchForm";
-import AirQualitySummary from "./AirQualitySummary";
+import AirQualitySummaries from "./AirQualitySummaries";
 
 const App = () => {
   const [results, setResults] = useState([]);
@@ -46,8 +46,8 @@ const App = () => {
     setSummaries([...summaries, ...data]);
   };
 
-  const deleteSummary = (e) => {
-    setSummaries(summaries.filter((summary) => summary.location !== e));
+  const deleteSummary = (id) => {
+    setSummaries(summaries.filter((summary, i) => i !== id));
   };
 
   return (
@@ -69,7 +69,7 @@ const App = () => {
         onSuggestHandler={onSuggestHandler}
         placeholder="Enter city name..."
       />
-      <AirQualitySummary onSubmit={deleteSummary} summaries={summaries} />
+      <AirQualitySummaries onSubmit={deleteSummary} summaries={summaries} />
     </div>
   );
 };

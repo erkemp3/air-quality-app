@@ -4,53 +4,32 @@ import AirQualitySummary from "../components/AirQualitySummary";
 
 describe("AirQualitySummary", () => {
   const validProps = {
-    summaries: [
-      {
-        city: "Leeds",
-        location: "Leeds Centre",
+    summary: {
+      city: "Leeds",
+      location: "Leeds Centre",
 
-        measurements: [
-          {
-            lastUpdated: "2021-02-01",
-            parameter: "pm10",
-            value: 9,
-          },
-          {
-            lastUpdated: "2021-03-01",
-            parameter: "s02",
-            value: 10,
-          },
-        ],
-        onSubmit: () => {},
-      },
-      {
-        city: "Manchester",
-        location: "Manchester Centre",
-
-        measurements: [
-          {
-            lastUpdated: "2021-04-01 19:00",
-            parameter: "c02",
-            value: 11,
-          },
-          {
-            lastUpdated: "2021-05-01",
-            parameter: "pm10",
-            value: 15,
-          },
-        ],
-        onSubmit: () => {},
-      },
-    ],
+      measurements: [
+        {
+          lastUpdated: "2021-02-01",
+          parameter: "pm10",
+          value: 9,
+        },
+        {
+          lastUpdated: "2021-03-01",
+          parameter: "s02",
+          value: 10,
+        },
+      ],
+    },
+    onSubmit: () => {},
+    id: 2,
   };
 
   it("renders correctly", () => {
     const { asFragment } = render(
       <AirQualitySummary
-        summaries={validProps.summaries}
-        city={validProps.city}
-        location={validProps.location}
-        measurements={validProps.measurements}
+        summary={validProps.summary}
+        id={validProps.id}
         onSubmit={validProps.onSubmit}
       />
     );
@@ -60,15 +39,13 @@ describe("AirQualitySummary", () => {
   it("renders correct values for props", () => {
     const { getByText } = render(
       <AirQualitySummary
-        summaries={validProps.summaries}
-        city={validProps.city}
-        location={validProps.location}
-        measurements={validProps.measurements}
+        summary={validProps.summary}
+        id={validProps.id}
         onSubmit={validProps.onSubmit}
       />
     );
 
     expect(getByText("Leeds Centre")).toHaveClass("location");
-    expect(getByText("in Manchester, United Kingdom")).toHaveClass("city");
+    expect(getByText("in Leeds, United Kingdom")).toHaveClass("city");
   });
 });
